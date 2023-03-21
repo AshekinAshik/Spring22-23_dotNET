@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ZeroHunger.EF.Models.ProdReq>
+
+@{
+    ViewBag.Title = "AcceptDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details of Request</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Prod_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Req_Id)
+        </th>
+    </tr>
+
+    @{
+        double total = 0;
+    }
+    @foreach (var prod in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Prod_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Req_Id)
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td>
+            <a href="/Admin/AcceptRequest" class="btn btn-danger">Accept Request</a>
+        </td>
+    </tr>
+</table>
+
