@@ -1,8 +1,59 @@
-﻿
+@model IEnumerable<ZeroHunger.EF.Models.ProdReq>
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
 }
 
-<h2>Index</h2>
+<html>
+    <head>
+    </head>
+    <body>
+        <div>
+            <h2>Choose Requests to Accept</h2>
+        </div>
+
+        <div>
+
+            @if (TempData["msg"] != null)
+            {
+                <h1 class="alert @TempData["color"]">@TempData["msg"]</h1>
+            }
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Prod_Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Req_Id)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prod_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Req_Id)
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="/Admin/AddAccept/@item.Id">Proceed Request</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div>
+            <p class="text-center">
+                @for (int i = 1; i <= ViewBag.pages; i++)
+                {
+                    <a href="/Admin/Index/@i" class="btn btn-danger">@i</a>
+                }
+            </p>
+        </div>
+    </body>
+</html>
 
