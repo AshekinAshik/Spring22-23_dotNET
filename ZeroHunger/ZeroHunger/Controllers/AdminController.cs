@@ -11,10 +11,18 @@ namespace ZeroHunger.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Index(int id = 1) //id means page number
         {
 
-            return View();
+            ZeroHungerContext db = new ZeroHungerContext();
+            int itemperpage = 10;
+            int total = db.ProdReqs.Count();
+            int pages = (int)Math.Ceiling(total / (double)itemperpage);
+            ViewBag.pages = pages;
+
+            var pr = db.ProdReqs.OrderBy(p => p.Id).Skip((id - 1) * itemperpage).Take(itemperpage).ToList();
+
+            return View(pr);
         }
 
         public ActionResult AddAccept(int id)
@@ -40,7 +48,7 @@ namespace ZeroHunger.Controllers
             });
             db.SaveChanges();
             Session["preq"] = preq;
-            TempData["msg"] = "Request Accepted!";
+            TempData["msg"] = "Request Proceeded!";
             TempData["color"] = "alert-success";
 
             return RedirectToAction("Index");
