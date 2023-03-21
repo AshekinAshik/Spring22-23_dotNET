@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ZeroHunger.EF.Models.Product>
+
+@{
+    ViewBag.Title = "RequestDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details of Request</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+    </tr>
+
+    @{
+        double total = 0;
+    }
+    @foreach (var prod in Model)
+    {
+        total += prod.Quantity;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Quantity)
+            </td>
+        </tr>
+    }
+    <tr>
+        <th>
+            Total Quantity of Food:
+        </th>
+        <th>
+            @total
+        </th>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="/Restaurant/PlaceRequest" class="btn btn-danger">Place Request</a>
+        </td>
+    </tr>
+</table>

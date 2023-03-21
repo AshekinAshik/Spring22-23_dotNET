@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ZeroHunger.EF.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<html>
+<head>
+</head>
+<body>
+    <div>
+        <h2>Choose Foods to Place Request</h2>
+    </div>
+
+    <div>
+
+        @if (TempData["msg"] != null)
+        {
+            <h1 class="alert @TempData["color"]">@TempData["msg"]</h1>
+        }
+
+        @*<p>
+                    @Html.ActionLink("Create New", "Create")
+            </p>*@
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.R_ID)
+                </th>*@
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.R_ID)
+                    </td>*@
+                    <td>
+                        <a class="btn btn-success" href="/Restaurant/AddReq/@item.Id">Add Request</a>
+                    </td>
+                </tr>
+            }
+
+            @*<tr>
+                <td>
+                    Add Expire Date to the Request
+                    <a class="btn btn-success" href="/Restaurant/SubmitExpDate"> Expire Date </a>
+                </td>
+            </tr>*@
+        </table>
+    </div>
+
+    @*<div>
+            <form method="post">
+                <br />
+                Date of Birth: <input type="date" value="@(Model==null? "": Model.Request.ExpDate.ToString("yyyy-MM-dd"))" name="ExpDate" />
+                <input type="submit" value="Submit Expire Date" class="btn btn-success" />
+            </form>
+        </div>*@
+
+    <div>
+        <p class="text-center">
+            @for (int i = 1; i <= ViewBag.pages; i++)
+            {
+                <a href="/Restaurant/Index/@i" class="btn btn-danger">@i</a>
+            }
+        </p>
+    </div>
+</body>
+</html>

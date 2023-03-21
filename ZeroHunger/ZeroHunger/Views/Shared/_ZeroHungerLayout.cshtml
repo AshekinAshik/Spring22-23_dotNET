@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        <style>
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background-color: #2F4B4C;
+                color: #fff;
+                padding: 5px;
+                text-align: center;
+                font-family: Bahnschrift;
+            }
+
+            footer {
+                background-color: #182C2B;
+                color: #fff;
+                padding: 2px;
+                text-align: center;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Zero Hunger</h1>
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+
+        <footer>
+            <p>© 2023 Zero Hunger</p>
+        </footer>
+    </body>
+</html>
